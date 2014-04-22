@@ -22,7 +22,9 @@ namespace ExakTimeSMSDailyJobReport
                message = String.Format("{0}: {1:M/d/yy}\n", employee.name, project.date);
                message += String.Format("{0}\n{1} hours", project.description.Trim(), project.hours);
 
-               Console.WriteLine(employee.phone + "\n");
+               TwilioMessage twilioMessage = new TwilioMessage(employee.phone, message);
+
+               twilioMessage.Send();
             }
          }
 

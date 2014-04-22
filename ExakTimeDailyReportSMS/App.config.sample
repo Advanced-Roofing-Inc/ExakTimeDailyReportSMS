@@ -7,4 +7,10 @@
    <connectionStrings>
       <add name="ExakTime" connectionString="Server=server;Database=database;user id=username;Password=password" />
    </connectionStrings>
+
+   <appSettings>
+      <add key="TwilioAccountSid" value="account sid" />
+      <add key="TwilioAuthToken" value="auth token" />
+      <add key="TwilioFromPhoneNumber" value="+1phone number" />
+   </appSettings>
 </configuration>

@@ -5,16 +5,16 @@ namespace ExakTimeSMSDailyJobReport
 {
    class Datasource
    {
-      private String connectionString { get; set; }
+      private String _connectionString { get; set; }
 
       public Datasource(String connectionString)
       {
-         this.connectionString = connectionString;
+         this._connectionString = connectionString;
       }
 
       public SqlConnection CreateConnection()
       {
-         SqlConnection connection = new SqlConnection(this.connectionString);
+         SqlConnection connection = new SqlConnection(this._connectionString);
 
          try
          {
