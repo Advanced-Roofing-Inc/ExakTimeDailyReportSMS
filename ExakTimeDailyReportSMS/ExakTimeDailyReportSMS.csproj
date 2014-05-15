@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datasource.cs" />
+    <Compile Include="EmailMessage.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
@@ -56,9 +57,7 @@
     <Compile Include="TwilioMessage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
     <None Include="App.config.sample">
       <SubType>Designer</SubType>
     </None>

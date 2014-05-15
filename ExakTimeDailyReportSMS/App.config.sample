@@ -12,5 +12,8 @@
       <add key="TwilioAccountSid" value="account sid" />
       <add key="TwilioAuthToken" value="auth token" />
       <add key="TwilioFromPhoneNumber" value="+1phone number" />
+
+      <add key="SmtpServer" value="smtp server address" />
+      <add key="SmtpFromAddress" value="smtp 'from' email address" />
    </appSettings>
 </configuration>

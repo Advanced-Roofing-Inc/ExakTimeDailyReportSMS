@@ -25,7 +25,7 @@ namespace ExakTimeSMSDailyJobReport
 
       public void Send()
       {
-         TwilioRestClient twilio = new TwilioRestClient(this._accountSid, this._authToken);
+         var twilio = new TwilioRestClient(this._accountSid, this._authToken);
 
          Console.WriteLine("Sending message to {0}", this.phoneNumber);
          var message = twilio.SendSmsMessage(this._fromPhoneNumber, this.phoneNumber, this.message, "");

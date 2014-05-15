@@ -14,7 +14,7 @@ namespace ExakTimeSMSDailyJobReport
 
       public SqlConnection CreateConnection()
       {
-         SqlConnection connection = new SqlConnection(this._connectionString);
+         var connection = new SqlConnection(this._connectionString);
 
          try
          {

@@ -13,15 +13,15 @@ namespace ExakTimeSMSDailyJobReport
 
       public static List<Project> GetProjectsForEmployeeForDate(Datasource dataSource, String employeeId, DateTime date)
       {
-         List<Project> projects = new List<Project>();
+         var projects = new List<Project>();
 
          using (SqlConnection connection = dataSource.CreateConnection())
          {
             try
             {
-               String commandText = "SELECT WorkDate, JobsiteNumber, JobsiteName, Hours FROM vw_timesummary WHERE EmployeeNumber = @employeeId AND WorkDate = @date";
+               var commandText = "SELECT WorkDate, JobsiteNumber, JobsiteName, Hours FROM vw_timesummary WHERE EmployeeNumber = @employeeId AND WorkDate = @date";
                
-               SqlCommand projectsSelect = new SqlCommand(commandText, connection);
+               var projectsSelect = new SqlCommand(commandText, connection);
                projectsSelect.Parameters.AddWithValue("@employeeId", employeeId);
                projectsSelect.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd 00:00:00"));
 
@@ -30,7 +30,7 @@ namespace ExakTimeSMSDailyJobReport
 
                while (reader.Read())
                {
-                  Project project = new Project();
+                  var project = new Project();
                   project.date = Convert.ToDateTime(reader["WorkDate"].ToString());
                   project.number = reader["JobsiteNumber"].ToString();
                   project.description = reader["JobsiteName"].ToString();
