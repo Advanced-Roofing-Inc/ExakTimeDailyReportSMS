@@ -28,7 +28,14 @@ namespace ExakTimeDailyReportSMS
             Body = this.Body
          })
          {
-            smtp.Send(message);
+            try
+            {
+               smtp.Send(message);
+            }
+            catch (Exception e)
+            {
+               Console.WriteLine(e.ToString());
+            }
          }
 
          Console.WriteLine("sending email...");
