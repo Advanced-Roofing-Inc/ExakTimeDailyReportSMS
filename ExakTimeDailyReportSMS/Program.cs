@@ -52,8 +52,8 @@ namespace ExakTimeSMSDailyJobReport
             emailMessage.Send();
 
             // Limit email messages to 1 every 10 seconds to prevent flooding Exchange
-            Console.WriteLine("Pausing for 10 seconds...");
-            System.Threading.Thread.Sleep(10000);
+            Console.WriteLine("Pausing for 30 seconds...");
+            System.Threading.Thread.Sleep(30000);
          }        
       }
    }
