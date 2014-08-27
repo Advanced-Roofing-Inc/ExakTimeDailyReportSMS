@@ -20,7 +20,7 @@ namespace ExakTimeSMSDailyJobReport
          {
             try
             {
-               var sqlQueryText = "SELECT EmployeeId, Name, Fax, eMailAddress FROM IMPORT_solomon_xhr_employee WHERE User6 in (0,'') and fax <> '' and Status = 'e'";
+                var sqlQueryText = "SELECT EmployeeId, Name, Fax, eMailAddress FROM IMPORT_solomon_xhr_employee WHERE User6 in (0,'') and fax <> '' and Status = 'e'";
 
                SqlDataReader sqlReader = null;
                SqlCommand employeesSelect = new SqlCommand(sqlQueryText, connection);
@@ -70,7 +70,7 @@ namespace ExakTimeSMSDailyJobReport
          {
             try
             {
-               var sqlQueryText = "SELECT EmployeeId, Name, Fax, eMailAddress FROM IMPORT_solomon_xhr_employee WHERE User6 = 1 AND eMailAddress <> '' and Status = 'e'";
+                var sqlQueryText = "SELECT EmployeeId, Name, Fax, eMailAddress FROM IMPORT_solomon_xhr_employee WHERE User6 = 1 AND eMailAddress <> '' and Status = 'e'";
 
                SqlDataReader sqlReader = null;
                SqlCommand employeesSelect = new SqlCommand(sqlQueryText, connection);

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Configuration;
 using ExakTimeDailyReportSMS;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace ExakTimeSMSDailyJobReport
 {
@@ -48,13 +51,9 @@ namespace ExakTimeSMSDailyJobReport
                Subject = "Daily Project Hours Report",
                Body = message
             };
-           
-            emailMessage.Send();
 
-            // Limit email messages to 1 every 10 seconds to prevent flooding Exchange
-            Console.WriteLine("Pausing for 30 seconds...");
-            System.Threading.Thread.Sleep(30000);
-         }        
+            emailMessage.Send();
+         }
       }
    }
 }

@@ -2,43 +2,36 @@
 using System.Configuration;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ExakTimeDailyReportSMS
 {
-   class EmailMessage
-   {
-      public String To { get; set; }
-      public String Subject { get; set; }
-      public String Body { get; set; }
+    class EmailMessage
+    {
+        public String To { get; set; }
+        public String Subject { get; set; }
+        public String Body { get; set; }
 
-      public void Send()
-      {
-         var smtp = new SmtpClient
-         {
-            Host = ConfigurationManager.AppSettings["SmtpServer"],
-            Port = 587,
-            EnableSsl = false,
-            DeliveryMethod = SmtpDeliveryMethod.Network,
-            Timeout = 20000
-         };
+        public void Send()
+        {
+            SmtpClient smtpClient = new SmtpClient();
+            
+            MailMessage message = new MailMessage();
+            message.Subject = Subject;
+            message.Body = Body;
+            message.To.Add(new MailAddress(To));
 
-         using (var message = new MailMessage(ConfigurationManager.AppSettings["SmtpFromAddress"], this.To)
-         {
-            Subject = this.Subject,
-            Body = this.Body
-         })
-         {
             try
             {
-               smtp.Send(message);
+                smtpClient.Send(message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-               Console.WriteLine(e.ToString());
+                Console.WriteLine(ex);
             }
-         }
 
-         Console.WriteLine("sending email...");
-      }
-   }
+            Console.WriteLine("sending email to {0}...", To);
+        }
+    }
 }

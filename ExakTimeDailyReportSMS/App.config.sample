@@ -1,19 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <configuration>
-   <startup>
-      <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
-   </startup>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
+  </startup>
 
-   <connectionStrings>
-      <add name="ExakTime" connectionString="Server=server;Database=database;user id=username;Password=password" />
-   </connectionStrings>
+  <connectionStrings>
+    <add name="ExakTime" connectionString="Server=servername;Database=database;user id=username;Password=password" />
+  </connectionStrings>
 
-   <appSettings>
-      <add key="TwilioAccountSid" value="account sid" />
-      <add key="TwilioAuthToken" value="auth token" />
-      <add key="TwilioFromPhoneNumber" value="+1phone number" />
+  <appSettings>
+    <add key="TwilioAccountSid" value="accountsid" />
+    <add key="TwilioAuthToken" value="authtoken" />
+    <add key="TwilioFromPhoneNumber" value="+1fromphonenumber" />
+  </appSettings>
 
-      <add key="SmtpServer" value="smtp server address" />
-      <add key="SmtpFromAddress" value="smtp 'from' email address" />
-   </appSettings>
+  <system.net>
+    <mailSettings>
+      <smtp from="fromaddress" deliveryMethod="Network">
+        <network host="server" port="25" userName="username" password="password" enableSsl="false" defaultCredentials="false" />
+      </smtp>
+    </mailSettings>
+  </system.net>
 </configuration>
