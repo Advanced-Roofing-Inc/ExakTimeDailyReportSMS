@@ -23,8 +23,8 @@ namespace ExakTimeSMSDailyJobReport
             foreach (var project in employee.projects)
             {
                var message = String.Empty;
-               message = String.Format("{0}: {1:M/d/yy}\n", employee.name, project.date);
-               message += String.Format("{0}\n{1} hours", project.description.Trim(), project.hours);
+               message += String.Format("{0}: {1:M/d/yy}\n", employee.name, project.date);
+               message += String.Format("{0}\n{1} hours\n\n", project.description.Trim(), project.hours);
 
                var twilioMessage = new TwilioMessage(employee.phone, message);
 
