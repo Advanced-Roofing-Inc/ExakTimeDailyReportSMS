@@ -29,6 +29,7 @@ namespace ExakTimeSMSDailyJobReport
 
                while (sqlReader.Read())
                {
+                  var reportDate = DateTime.Now.AddDays(-1);
                   var employee = new Employee();
 
                   // Employee ID
@@ -44,7 +45,7 @@ namespace ExakTimeSMSDailyJobReport
                   employee.email = sqlReader["eMailAddress"].ToString();
 
                   // Query for a list of projects
-                  employee.projects = Project.GetProjectsForEmployeeForDate(dataSource, employee.id, DateTime.Now);
+                  employee.projects = Project.GetProjectsForEmployeeForDate(dataSource, employee.id, reportDate);
 
                   employees.Add(employee);
                }
@@ -79,6 +80,9 @@ namespace ExakTimeSMSDailyJobReport
 
                while (sqlReader.Read())
                {
+                  // Date to fetch projects on
+                  var reportDate = DateTime.Now.AddDays(-1);
+
                   var employee = new Employee();
 
                   // Employee ID
@@ -91,7 +95,7 @@ namespace ExakTimeSMSDailyJobReport
                   employee.email = sqlReader["eMailAddress"].ToString();
 
                   // Query for a list of projects
-                  employee.projects = Project.GetProjectsForEmployeeForDate(dataSource, employee.id, DateTime.Now);
+                  employee.projects = Project.GetProjectsForEmployeeForDate(dataSource, employee.id, reportDate);
 
                   if (employee.projects.Count > 0)
                   {
