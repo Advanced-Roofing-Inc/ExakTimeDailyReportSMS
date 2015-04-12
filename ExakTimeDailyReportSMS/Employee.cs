@@ -11,6 +11,8 @@ namespace ExakTimeSMSDailyJobReport
       public String phone { get; set; }
       public String email { get; set; }
       public List<Project> projects { get; set; }
+      public Double dailyHours { get; set; }
+      public Double weeklyHours { get; set; }
 
       public static List<Employee> WithCellNumber(Datasource dataSource)
       {
@@ -47,6 +49,8 @@ namespace ExakTimeSMSDailyJobReport
                   // Query for a list of projects
                   employee.projects = Project.GetProjectsForEmployeeForDate(dataSource, employee.id, reportDate);
 
+                  employee.calculateWeeklyHours(dataSource);
+                  employee.calculateDailyHours();
                   employees.Add(employee);
                }
             }
@@ -99,6 +103,8 @@ namespace ExakTimeSMSDailyJobReport
 
                   if (employee.projects.Count > 0)
                   {
+                     employee.calculateWeeklyHours(dataSource);
+                     employee.calculateDailyHours();
                      employees.Add(employee);
                   }                 
                }
@@ -113,6 +119,61 @@ namespace ExakTimeSMSDailyJobReport
             }
          }
          return employees;
+      }
+
+      public void calculateDailyHours()
+      {
+         Double hours = 0;
+
+         for (int i = 0; i < this.projects.Count; i++)
+         {
+            hours += this.projects[i].hours;
+         }
+
+         this.dailyHours = hours;
+      }
+
+      public void calculateWeeklyHours(Datasource datasource)
+      {
+         Double hours = 0;
+         DateTime today = DateTime.Today.AddDays(-1);
+         DateTime startDate = new DateTime(today.Year, today.Month, today.Day);
+
+         while (startDate.DayOfWeek != DayOfWeek.Monday)
+         {
+            startDate = startDate.AddDays(-1);
+         }
+
+         using (var connection = datasource.CreateConnection())
+         {
+            try
+            {
+               var commandText = "SELECT Hours FROM vw_timesummary WHERE EmployeeNumber = @employeeId AND WorkDate >= @startDate AND WorkDate <= @endDate";
+
+               var hoursSelect = new SqlCommand(commandText, connection);
+               hoursSelect.Parameters.AddWithValue("@employeeId", this.id);
+               hoursSelect.Parameters.AddWithValue("@startDate", startDate.ToString("yyyy-MM-dd 00:00:00"));
+               hoursSelect.Parameters.AddWithValue("@endDate", today.ToString("yyyy-MM-dd 23:59:59"));
+
+               SqlDataReader reader = hoursSelect.ExecuteReader();
+
+               while (reader.Read())
+               {
+                  hours += Convert.ToDouble(reader["Hours"].ToString());
+               }
+
+            }
+            catch (Exception e)
+            {
+               Console.WriteLine(e.ToString());
+            }
+            finally
+            {
+               connection.Close();
+            }
+         }
+
+         this.weeklyHours = hours;
       }
    }
 }
