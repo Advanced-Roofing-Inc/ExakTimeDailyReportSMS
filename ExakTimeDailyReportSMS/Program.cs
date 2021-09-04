@@ -13,6 +13,8 @@ namespace ExakTimeSMSDailyJobReport
    {
       static void Main(string[] args)
       {
+         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
          Console.WriteLine("Running ExakTimeDailyReportSMS");
          var dataSource = new Datasource(ConfigurationManager.ConnectionStrings["ExakTime"].ConnectionString);
 
